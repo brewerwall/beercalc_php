@@ -2,6 +2,22 @@
 
 Beercalc is a small helper class that holds various calculations to aid in designing your own beer recipes.  
 
+## Installation
+
+Create a `composer.json` file in your project root.
+```json
+{
+    "require": {
+        "brewerwall/beercalc_php": "dev-master"
+    }
+}
+```
+Install via composer:
+```shell
+php composer.phar install
+```
+
+
 ## Methods
 
 ### Beercalc::abv($og, $fg)
