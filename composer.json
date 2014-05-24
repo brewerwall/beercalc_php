@@ -1,0 +1,19 @@
+{
+    "name": "brewerwall/beercalc_php",
+    "description": "PHP class for common beer calculations for brewers.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "griffithben",
+            "email": "griffith.ben@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-0": {
+            "Beercalc": "src"
+        }
+    }
+}
