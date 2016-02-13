@@ -120,6 +120,6 @@ class BeercalcTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(null, Beercalc::gravityCorrection("asdf", 1.050, 60));
     $this->assertEquals(null, Beercalc::gravityCorrection("asdf", "asdf", 60));
     $this->assertEquals(null, Beercalc::gravityCorrection(100.4, "1.050", "asdf"));
-    $this->assertEquals(null, Beercalc::gravityCorrection("asdf", "asdf", "asdf"))
+    $this->assertEquals(null, Beercalc::gravityCorrection("asdf", "asdf", "asdf"));
   }
 }
