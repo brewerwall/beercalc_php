@@ -190,7 +190,7 @@ class Beercalc{
   # param g: number - Gravity from the hydrometer reading
   # param cal: number - Hydrometer calibration temperature in Fahrenheit
   */
-  public static function gravity_correction($temp, $g, $cal)
+  public static function gravityCorrection($temp, $g, $cal)
   {
     if (is_numeric($g) && is_numeric($temp) && is_numeric($cal))
       return $g * ((1.00130346 - 0.000134722124 * $temp + 0.00000204052596 * pow($temp, 2) - 0.00000000232820948 * pow($temp, 3)) / (1.00130346 - 0.000134722124 * $cal + 0.00000204052596 * pow($cal, 2) - 0.00000000232820948 * pow($cal, 3)));
