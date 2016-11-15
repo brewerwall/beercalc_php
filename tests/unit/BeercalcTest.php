@@ -5,13 +5,13 @@ namespace Beercalc;
 class BeercalcTest extends \PHPUnit_Framework_TestCase {
 
   public function testABV(){
-    $this->assertEquals(7.204999999999992, Beercalc::abv(1.055, 1));
+    $this->assertEquals(7.319479429051208, Beercalc::abv(1.055, 1));
     $this->assertEquals(null, Beercalc::abv(1, 1.055));
     $this->assertEquals(null, Beercalc::abv("asdf", "asdf"));
   }
 
   public function testABW(){
-    $this->assertEquals(5.691949999999994, Beercalc::abw(1.055, 1));
+    $this->assertEquals(5.782388748950455, Beercalc::abw(1.055, 1));
     $this->assertEquals(null, Beercalc::abw(1, 1.055));
     $this->assertEquals(null, Beercalc::abw("asdf", "asdf"));
   }
@@ -75,7 +75,7 @@ class BeercalcTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testCalories(){
-    $this->assertEquals(227.57821703464833, Beercalc::calories(1.070, 1.015));  // Based on http://hbd.org/ensmingr/
+    $this->assertEquals(234.97692128247783, Beercalc::calories(1.070, 1.015));  // Based on http://hbd.org/ensmingr/
     $this->assertEquals(null, Beercalc::calories(1.015, 1.070));
     $this->assertEquals(null, Beercalc::calories(null, null));
     $this->assertEquals(null, Beercalc::calories("asdf", "asdf"));
