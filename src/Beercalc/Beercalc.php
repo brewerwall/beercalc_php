@@ -10,7 +10,7 @@ class Beercalc{
   */
   public static function abv($og, $fg){
     if($og > $fg && is_numeric($og) && is_numeric($fg))
-      return ($og - $fg) * 131;
+      return (76.08 * ($og - $fg) / (1.775 - $og)) * ($fg / 0.794);
     else
       return null;
   }
