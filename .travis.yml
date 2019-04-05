@@ -4,4 +4,4 @@ php:
 before_script:
     - composer install
 script:
-    - ./vendor/bin/phpunit
+    - php vendor/bin/phpunit
