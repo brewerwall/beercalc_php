@@ -11,7 +11,7 @@ final class Beercalc
      * @param float $finalGravity
      * @return float|null
      */
-    public static function abv(float $originalGravity, float $finalGravity): ?float
+    public function abv(float $originalGravity, float $finalGravity): ?float
     {
         if($originalGravity > $finalGravity){
             return (76.08 * ($originalGravity - $finalGravity) / (1.775 - $originalGravity)) * ($finalGravity / 0.794);
@@ -27,7 +27,7 @@ final class Beercalc
      * @param float $finalGravity
      * @return float|null
      */
-    public static function abw(float $originalGravity, float $finalGravity): ?float
+    public function abw(float $originalGravity, float $finalGravity): ?float
     {
         if($originalGravity > $finalGravity){
             return (0.79 * self::abv($originalGravity, $finalGravity)) / $finalGravity;
@@ -44,7 +44,7 @@ final class Beercalc
      * @param float $gallons
      * @return float|null
      */
-    public static function mcu(float $pounds, float $lovibond, float $gallons): ?float
+    public function mcu(float $pounds, float $lovibond, float $gallons): ?float
     {
         if($gallons > 0 || $gallons < 0){
             return ($pounds * $lovibond) / $gallons;
@@ -61,7 +61,7 @@ final class Beercalc
      * @param float $gallons
      * @return float|null
      */
-    public static function srm(float $pounds, float $lovibond, float $gallons): ?float
+    public function srm(float $pounds, float $lovibond, float $gallons): ?float
     {
         return 1.4922 * (pow(self::mcu($pounds, $lovibond, $gallons), 0.6859));
     }
@@ -73,7 +73,7 @@ final class Beercalc
      * @param float $ounces
      * @return void
      */
-    public static function aau(float $alphaAcid, float $ounces): float
+    public function aau(float $alphaAcid, float $ounces): float
     {
         return $alphaAcid * $ounces;
     }
@@ -85,7 +85,7 @@ final class Beercalc
      * @param float $specificGravity
      * @return float
      */
-    public static function utilization(float $minutes, float $specificGravity): float
+    public function utilization(float $minutes, float $specificGravity): float
     {
         return (1.65 * pow(0.000125,($specificGravity - 1))) * (1 - pow(M_E,(-0.04 * $minutes))) / 4.15;
     }
@@ -100,7 +100,7 @@ final class Beercalc
      * @param float $gallons
      * @return float|null
      */
-    public static function ibu(float $alphaAcid, float $ounces, float $minutes, float $specificGravity, float $gallons): ?float
+    public function ibu(float $alphaAcid, float $ounces, float $minutes, float $specificGravity, float $gallons): ?float
     {
         if($gallons > 0 || $gallons < 0){
             return self::aau($alphaAcid, $ounces) * self::utilization($minutes, $specificGravity) * 75 / $gallons;
@@ -115,7 +115,7 @@ final class Beercalc
      * @param float $specificGravity
      * @return float
      */
-    public static function convertToPlato(float $specificGravity): float
+    public function convertToPlato(float $specificGravity): float
     {
         return (-463.37) + (668.72 * $specificGravity) - (205.35 * pow($specificGravity,2));
     }
@@ -128,7 +128,7 @@ final class Beercalc
      * @param float $finalGravity
      * @return void
      */
-    public static function realExtract(float $originalGravity, float $finalGravity)
+    public function realExtract(float $originalGravity, float $finalGravity)
     {
         if($originalGravity > $finalGravity){
             return(0.1808 * self::convertToPlato($originalGravity)) + (0.8192 * self::convertToPlato($finalGravity));
@@ -144,7 +144,7 @@ final class Beercalc
      * @param float $finalGravity
      * @return float|null
      */
-    public static function calories(float $originalGravity, float $finalGravity): ?float
+    public function calories(float $originalGravity, float $finalGravity): ?float
     {
         if($originalGravity > $finalGravity){
             return ((6.9 * self::abw($originalGravity, $finalGravity)) + 4.0 * (self::realExtract($originalGravity, $finalGravity) - 0.1)) * $finalGravity * 3.55;
@@ -160,7 +160,7 @@ final class Beercalc
      * @param float $finalGravity
      * @return float|null
      */
-    public static function attenuation(float $originalGravity, float $finalGravity): ?float
+    public function attenuation(float $originalGravity, float $finalGravity): ?float
     {
         if($originalGravity > $finalGravity){
             return ($originalGravity - $finalGravity)/($originalGravity - 1);
@@ -177,7 +177,7 @@ final class Beercalc
      * @param float $calibrationFahrenheit
      * @return float
      */
-    public static function gravityCorrection(float $fahrenheit, float $specificGravity, float $calibrationFahrenheit): float
+    public function gravityCorrection(float $fahrenheit, float $specificGravity, float $calibrationFahrenheit): float
     {
         return $specificGravity * ((1.00130346 - 0.000134722124 * $fahrenheit + 0.00000204052596 * pow($fahrenheit, 2) - 0.00000000232820948 * pow($fahrenheit, 3)) / (1.00130346 - 0.000134722124 * $calibrationFahrenheit + 0.00000204052596 * pow($calibrationFahrenheit, 2) - 0.00000000232820948 * pow($calibrationFahrenheit, 3)));
     }
