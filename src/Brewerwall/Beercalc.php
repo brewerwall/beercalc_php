@@ -174,11 +174,11 @@ final class Beercalc
      *
      * @param float $fahrenheit
      * @param float $specificGravity
-     * @param float $calibrationFahrenheit
+     * @param float $calibrateFahrenheit
      * @return float
      */
-    public function gravityCorrection(float $fahrenheit, float $specificGravity, float $calibrationFahrenheit): float
+    public function gravityCorrection(float $fahrenheit, float $specificGravity, float $calibrateFahrenheit): float
     {
-        return $specificGravity * ((1.00130346 - 0.000134722124 * $fahrenheit + 0.00000204052596 * pow($fahrenheit, 2) - 0.00000000232820948 * pow($fahrenheit, 3)) / (1.00130346 - 0.000134722124 * $calibrationFahrenheit + 0.00000204052596 * pow($calibrationFahrenheit, 2) - 0.00000000232820948 * pow($calibrationFahrenheit, 3)));
+        return $specificGravity * ((1.00130346 - 0.000134722124 * $fahrenheit + 0.00000204052596 * pow($fahrenheit, 2) - 0.00000000232820948 * pow($fahrenheit, 3)) / (1.00130346 - 0.000134722124 * $calibrateFahrenheit + 0.00000204052596 * pow($calibrateFahrenheit, 2) - 0.00000000232820948 * pow($calibrateFahrenheit, 3)));
     }
 }
