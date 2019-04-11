@@ -8,7 +8,7 @@ Create a `composer.json` file in your project root.
 ```json
 {
     "require": {
-        "brewerwall/beercalc_php": "2.0.0"
+        "brewerwall/beercalc_php": "^2.1.0"
     }
 }
 ```
