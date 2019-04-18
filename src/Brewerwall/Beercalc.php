@@ -5,15 +5,16 @@ namespace Brewerwall;
 final class Beercalc
 {
     /**
-     * Determines the Alcohol By Volume (ABV)
+     * Determines the Alcohol By Volume (ABV).
      *
      * @param float $originalGravity
      * @param float $finalGravity
+     *
      * @return float|null
      */
     public function abv(float $originalGravity, float $finalGravity): ?float
     {
-        if($originalGravity > $finalGravity){
+        if ($originalGravity > $finalGravity) {
             return (76.08 * ($originalGravity - $finalGravity) / (1.775 - $originalGravity)) * ($finalGravity / 0.794);
         }
 
@@ -21,15 +22,16 @@ final class Beercalc
     }
 
     /**
-     * Determines Alcohol By Weight (ABW)
+     * Determines Alcohol By Weight (ABW).
      *
      * @param float $originalGravity
      * @param float $finalGravity
+     *
      * @return float|null
      */
     public function abw(float $originalGravity, float $finalGravity): ?float
     {
-        if($originalGravity > $finalGravity){
+        if ($originalGravity > $finalGravity) {
             return (0.79 * self::abv($originalGravity, $finalGravity)) / $finalGravity;
         }
 
@@ -37,16 +39,17 @@ final class Beercalc
     }
 
     /**
-     * Determines Malt Color Unit (MCU)
+     * Determines Malt Color Unit (MCU).
      *
      * @param float $pounds
      * @param float $lovibond
      * @param float $gallons
+     *
      * @return float|null
      */
     public function mcu(float $pounds, float $lovibond, float $gallons): ?float
     {
-        if($gallons > 0 || $gallons < 0){
+        if ($gallons > 0 || $gallons < 0) {
             return ($pounds * $lovibond) / $gallons;
         }
 
@@ -54,11 +57,12 @@ final class Beercalc
     }
 
     /**
-     * Determines Standard Reference Method (SRM)
+     * Determines Standard Reference Method (SRM).
      *
      * @param float $pounds
      * @param float $lovibond
      * @param float $gallons
+     *
      * @return float|null
      */
     public function srm(float $pounds, float $lovibond, float $gallons): ?float
@@ -67,11 +71,10 @@ final class Beercalc
     }
 
     /**
-     * Determines Alpha Acid Unit (AAU)
+     * Determines Alpha Acid Unit (AAU).
      *
      * @param float $alphaAcid
      * @param float $ounces
-     * @return void
      */
     public function aau(float $alphaAcid, float $ounces): float
     {
@@ -79,30 +82,32 @@ final class Beercalc
     }
 
     /**
-     * Determines Hop Utilization
+     * Determines Hop Utilization.
      *
      * @param float $minutes
      * @param float $specificGravity
+     *
      * @return float
      */
     public function utilization(float $minutes, float $specificGravity): float
     {
-        return (1.65 * pow(0.000125,($specificGravity - 1))) * (1 - pow(M_E,(-0.04 * $minutes))) / 4.15;
+        return (1.65 * pow(0.000125, ($specificGravity - 1))) * (1 - pow(M_E, (-0.04 * $minutes))) / 4.15;
     }
 
     /**
-     * Determines Internation Bittering Units (IBU)
+     * Determines Internation Bittering Units (IBU).
      *
      * @param float $alphaAcid
      * @param float $ounces
      * @param float $minutes
      * @param float $specificGravity
      * @param float $gallons
+     *
      * @return float|null
      */
     public function ibu(float $alphaAcid, float $ounces, float $minutes, float $specificGravity, float $gallons): ?float
     {
-        if($gallons > 0 || $gallons < 0){
+        if ($gallons > 0 || $gallons < 0) {
             return self::aau($alphaAcid, $ounces) * self::utilization($minutes, $specificGravity) * 75 / $gallons;
         }
 
@@ -110,27 +115,27 @@ final class Beercalc
     }
 
     /**
-     * Convert Specific Gravity to Plato http://hbd.org/ensmingr/
+     * Convert Specific Gravity to Plato http://hbd.org/ensmingr/.
      *
      * @param float $specificGravity
+     *
      * @return float
      */
     public function convertToPlato(float $specificGravity): float
     {
-        return (-463.37) + (668.72 * $specificGravity) - (205.35 * pow($specificGravity,2));
+        return (-463.37) + (668.72 * $specificGravity) - (205.35 * pow($specificGravity, 2));
     }
 
     /**
      * Determine the Real Extract value.
-     * http://hbd.org/ensmingr/
+     * http://hbd.org/ensmingr/.
      *
      * @param float $originalGravity
      * @param float $finalGravity
-     * @return void
      */
-    public function realExtract(float $originalGravity, float $finalGravity)
+    public function realExtract(float $originalGravity, float $finalGravity): ?float
     {
-        if($originalGravity > $finalGravity){
+        if ($originalGravity > $finalGravity) {
             return(0.1808 * self::convertToPlato($originalGravity)) + (0.8192 * self::convertToPlato($finalGravity));
         }
 
@@ -138,15 +143,16 @@ final class Beercalc
     }
 
     /**
-     * Determine Calories per 12oz Serving
+     * Determine Calories per 12oz Serving.
      *
      * @param float $originalGravity
      * @param float $finalGravity
+     *
      * @return float|null
      */
     public function calories(float $originalGravity, float $finalGravity): ?float
     {
-        if($originalGravity > $finalGravity){
+        if ($originalGravity > $finalGravity) {
             return ((6.9 * self::abw($originalGravity, $finalGravity)) + 4.0 * (self::realExtract($originalGravity, $finalGravity) - 0.1)) * $finalGravity * 3.55;
         }
 
@@ -154,27 +160,29 @@ final class Beercalc
     }
 
     /**
-     * Determines Attenuation
+     * Determines Attenuation.
      *
      * @param float $originalGravity
      * @param float $finalGravity
+     *
      * @return float|null
      */
     public function attenuation(float $originalGravity, float $finalGravity): ?float
     {
-        if($originalGravity > $finalGravity){
-            return ($originalGravity - $finalGravity)/($originalGravity - 1);
+        if ($originalGravity > $finalGravity) {
+            return ($originalGravity - $finalGravity) / ($originalGravity - 1);
         }
 
         return null;
     }
 
     /**
-     * Determines Gravity Temperature Correction
+     * Determines Gravity Temperature Correction.
      *
      * @param float $fahrenheit
      * @param float $specificGravity
      * @param float $calibrateFahrenheit
+     *
      * @return float
      */
     public function gravityCorrection(float $fahrenheit, float $specificGravity, float $calibrateFahrenheit): float
